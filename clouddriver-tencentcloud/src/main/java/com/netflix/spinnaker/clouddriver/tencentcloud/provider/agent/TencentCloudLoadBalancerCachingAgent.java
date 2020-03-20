@@ -437,10 +437,13 @@ public class TencentCloudLoadBalancerCachingAgent
         applications.put(appKey, cacheData);
       }
       applications.get(appKey).getAttributes().put("name", applicationName);
-      applications
-          .get(appKey)
-          .getRelationships()
-          .put(LOAD_BALANCERS.ns, Arrays.asList(loadBalancerKey));
+      if (applications.get(appKey).getRelationships().containsKey(LOAD_BALANCERS.ns)) {
+        applications.get(appKey).getRelationships().get(LOAD_BALANCERS.ns).add(loadBalancerKey);
+      } else {
+        List<String> lbKeys = new ArrayList<>();
+        lbKeys.add(loadBalancerKey);
+        applications.get(appKey).getRelationships().put(LOAD_BALANCERS.ns, lbKeys);
+      }
 
       CacheData lbData = new MutableCacheData(loadBalancerKey);
       lbData.getAttributes().put("application", applicationName);
