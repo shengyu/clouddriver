@@ -20,9 +20,13 @@ import com.netflix.spinnaker.cats.cache.CacheData;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MutableCacheData implements CacheData {
 
   private String id;

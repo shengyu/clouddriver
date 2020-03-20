@@ -418,9 +418,8 @@ public class TencentCloudServerGroupCachingAgent extends AbstractTencentCloudCac
 
   public void mergeOnDemandCache(
       CacheData onDemandServerGroupCache, Map<String, Map<String, CacheData>> namespaceCache) {
-    Map<String, List<MutableCacheData>> onDemandCache = null;
     try {
-      onDemandCache =
+      Map<String, List<MutableCacheData>> onDemandCache =
           getObjectMapper()
               .readValue(
                   (String) onDemandServerGroupCache.getAttributes().get("cacheResults"),
