@@ -67,8 +67,7 @@ public class UpsertTencentCloudLoadBalancerAtomicOperation implements AtomicOper
                 + "...");
     log.info("UpsertTencentCloudLoadBalancerAtomicOperation operate params = " + description);
 
-    String loadBalancerName = description.getLoadBalancerName();
-    if (StringUtils.isEmpty(loadBalancerName)) {
+    if (StringUtils.isEmpty(description.getLoadBalancerId())) {
       // create new loadBalancer
       insertLoadBalancer(description);
     } else {
