@@ -162,8 +162,6 @@ public class AutoScalingClient extends AbstractTencentCloudServiceClient {
     createLaunchConfigurationRequest.setLaunchConfigurationName(launchConfigurationName);
     createLaunchConfigurationRequest.setImageId(description.getImageId());
 
-    // TODO shengyu need to delete, only for testing
-    createLaunchConfigurationRequest.setProjectId(1153961);
     if (description.getProjectId() != null) {
       createLaunchConfigurationRequest.setProjectId(description.getProjectId());
     }
@@ -284,8 +282,6 @@ public class AutoScalingClient extends AbstractTencentCloudServiceClient {
       createAutoScalingGroupRequest.setZones(description.getZones().toArray(new String[0]));
     }
 
-    // TODO shengyu need to delete, only for testing
-    createAutoScalingGroupRequest.setProjectId(1153961);
     if (description.getProjectId() != null) {
       createAutoScalingGroupRequest.setProjectId(description.getProjectId());
     }
