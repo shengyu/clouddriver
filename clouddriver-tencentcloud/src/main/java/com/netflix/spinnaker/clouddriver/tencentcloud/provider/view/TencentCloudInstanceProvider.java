@@ -42,6 +42,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
 @Component
 public class TencentCloudInstanceProvider
@@ -93,8 +94,11 @@ public class TencentCloudInstanceProvider
     Assert.notNull(attributes, "Attributes from cache must not be null");
 
     Map asgInfo = (Map) attributes.get("asg");
+    if (CollectionUtils.isEmpty(asgInfo)) {
+      return instance;
+    }
     List lbInfo = (List) asgInfo.get("forwardLoadBalancerSet");
-    if (lbInfo != null) {
+    if (!CollectionUtils.isEmpty(lbInfo)) {
       String lbId = (String) ((Map) lbInfo.get(0)).get("loadBalancerId");
       String listenerId = (String) ((Map) lbInfo.get(0)).get("listenerId");
       String lbHealthKey =
