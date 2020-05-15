@@ -21,8 +21,10 @@ import com.netflix.spinnaker.clouddriver.model.Image;
 import java.util.List;
 import java.util.Map;
 import lombok.Builder;
+import lombok.Data;
 
 @Builder
+@Data
 public class TencentCloudImage implements Image {
 
   private String name;
@@ -37,61 +39,5 @@ public class TencentCloudImage implements Image {
   @JsonIgnore
   public String getId() {
     return imageId;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getRegion() {
-    return region;
-  }
-
-  public void setRegion(String region) {
-    this.region = region;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  public String getCreatedTime() {
-    return createdTime;
-  }
-
-  public void setCreatedTime(String createdTime) {
-    this.createdTime = createdTime;
-  }
-
-  public String getImageId() {
-    return imageId;
-  }
-
-  public void setImageId(String imageId) {
-    this.imageId = imageId;
-  }
-
-  public String getOsPlatform() {
-    return osPlatform;
-  }
-
-  public void setOsPlatform(String osPlatform) {
-    this.osPlatform = osPlatform;
-  }
-
-  public List<Map<String, Object>> getSnapshotSet() {
-    return snapshotSet;
-  }
-
-  public void setSnapshotSet(List<Map<String, Object>> snapshotSet) {
-    this.snapshotSet = snapshotSet;
   }
 }

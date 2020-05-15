@@ -35,8 +35,8 @@ public class ResizeTencentCloudServerGroupDescription
   @Data
   public static class Capacity {
 
-    private Integer min;
-    private Integer max;
-    private Integer desired;
+    private Long min;
+    private Long max;
+    private Long desired;
   }
 }

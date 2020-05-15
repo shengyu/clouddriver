@@ -25,7 +25,7 @@ public class TencentCloudLoadBalancerRule {
   private String locationId;
   private String domain;
   private String url;
-  private Integer sessionExpireTime;
+  private Long sessionExpireTime;
   private TencentCloudLoadBalancerHealthCheck healthCheck;
   private TencentCloudLoadBalancerCertificate certificate;
   private String scheduler;

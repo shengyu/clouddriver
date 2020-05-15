@@ -107,8 +107,8 @@ public class AutoScalingClient extends AbstractTencentCloudServiceClient {
   private static final String CLB_ENDPOINT = "clb.tencentcloudapi.com";
   private static final String DEFAULT_SERVER_GROUP_TAG_KEY = "spinnaker:server-group-name";
 
-  private AsClient client;
-  private ClbClient clbClient;
+  private final AsClient client;
+  private final ClbClient clbClient;
 
   public AutoScalingClient(String secretId, String secretKey, String region) {
     super(secretId, secretKey);
@@ -348,7 +348,7 @@ public class AutoScalingClient extends AbstractTencentCloudServiceClient {
       DescribeLaunchConfigurationsRequest request = new DescribeLaunchConfigurationsRequest();
       request.setLimit(DEFAULT_LIMIT);
       for (int i = 0; i < len; i += DEFAULT_LIMIT) {
-        int endIndex = Math.min(len, i + DEFAULT_LIMIT);
+        int endIndex = Math.toIntExact(Math.min(len, i + DEFAULT_LIMIT));
         request.setLaunchConfigurationIds(
             launchConfigurationIds.subList(i, endIndex).toArray(new String[0]));
 
@@ -376,7 +376,7 @@ public class AutoScalingClient extends AbstractTencentCloudServiceClient {
     }
 
     try {
-      int offset = 0;
+      long offset = 0;
       int queryIndex = 0;
       while (queryIndex++ < MAX_QUERY_TIME) {
         request.setOffset(offset);
@@ -418,7 +418,7 @@ public class AutoScalingClient extends AbstractTencentCloudServiceClient {
     }
 
     try {
-      int offset = 0;
+      long offset = 0;
       int queryIndex = 0;
       while (queryIndex++ < MAX_QUERY_TIME) {
         request.setOffset(offset);
@@ -651,7 +651,7 @@ public class AutoScalingClient extends AbstractTencentCloudServiceClient {
     }
 
     try {
-      int offset = 0;
+      long offset = 0;
       int queryIndex = 0;
       while (queryIndex++ < MAX_QUERY_TIME) {
         request.setOffset(offset);
@@ -736,7 +736,7 @@ public class AutoScalingClient extends AbstractTencentCloudServiceClient {
     }
 
     try {
-      int offset = 0;
+      long offset = 0;
       int queryIndex = 0;
       while (queryIndex++ < MAX_QUERY_TIME) {
         request.setOffset(offset);

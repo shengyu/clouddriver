@@ -110,8 +110,8 @@ public class CloneTencentCloudServerGroupAtomicOperation
       String newImageId = imageId != null ? imageId : sourceLaunchConfig.getImageId();
       newDescription.setImageId(newImageId);
 
-      Integer projectId = description.getProjectId();
-      Integer newProjectId = projectId != null ? projectId : sourceLaunchConfig.getProjectId();
+      Long projectId = description.getProjectId();
+      Long newProjectId = projectId != null ? projectId : sourceLaunchConfig.getProjectId();
       newDescription.setProjectId(newProjectId);
 
       SystemDisk systemDisk = description.getSystemDisk();
@@ -176,17 +176,16 @@ public class CloneTencentCloudServerGroupAtomicOperation
 
     AutoScalingGroup sourceAutoScalingGroup = sourceServerGroup.getAsg();
     if (sourceAutoScalingGroup != null) {
-      Integer maxSize = description.getMaxSize();
-      Integer newMaxSize = maxSize != null ? maxSize : sourceAutoScalingGroup.getMaxSize();
+      Long maxSize = description.getMaxSize();
+      Long newMaxSize = maxSize != null ? maxSize : sourceAutoScalingGroup.getMaxSize();
       newDescription.setMaxSize(newMaxSize);
 
-      Integer minSize = description.getMinSize();
-      Integer newMinSize = minSize != null ? minSize : sourceAutoScalingGroup.getMinSize();
+      Long minSize = description.getMinSize();
+      Long newMinSize = minSize != null ? minSize : sourceAutoScalingGroup.getMinSize();
       newDescription.setMinSize(newMinSize);
 
-      Integer capacity = description.getDesiredCapacity();
-      Integer newCapacity =
-          capacity != null ? capacity : sourceAutoScalingGroup.getDesiredCapacity();
+      Long capacity = description.getDesiredCapacity();
+      Long newCapacity = capacity != null ? capacity : sourceAutoScalingGroup.getDesiredCapacity();
       newDescription.setDesiredCapacity(newCapacity);
 
       String vpcId = description.getVpcId();
@@ -210,9 +209,8 @@ public class CloneTencentCloudServerGroupAtomicOperation
         newDescription.setZones(newZones);
       }
 
-      Integer cooldown = description.getDefaultCooldown();
-      Integer newCooldown =
-          cooldown != null ? cooldown : sourceAutoScalingGroup.getDefaultCooldown();
+      Long cooldown = description.getDefaultCooldown();
+      Long newCooldown = cooldown != null ? cooldown : sourceAutoScalingGroup.getDefaultCooldown();
       newDescription.setDefaultCooldown(newCooldown);
 
       List<String> policies = description.getTerminationPolicies();

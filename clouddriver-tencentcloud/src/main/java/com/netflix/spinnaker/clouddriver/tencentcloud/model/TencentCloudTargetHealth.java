@@ -25,7 +25,9 @@ import com.netflix.spinnaker.clouddriver.model.HealthState;
 import com.netflix.spinnaker.clouddriver.tencentcloud.model.TencentCloudTargetHealth.LBHealthSummary.ServiceStatus;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
 
+@Data
 public class TencentCloudTargetHealth implements Health {
 
   private TargetHealthStatus targetHealthStatus;
@@ -55,22 +57,6 @@ public class TencentCloudTargetHealth implements Health {
     return "LoadBalancer";
   }
 
-  public TargetHealthStatus getTargetHealthStatus() {
-    return targetHealthStatus;
-  }
-
-  public void setTargetHealthStatus(TargetHealthStatus targetHealthStatus) {
-    this.targetHealthStatus = targetHealthStatus;
-  }
-
-  public List<LBHealthSummary> getLoadBalancers() {
-    return loadBalancers;
-  }
-
-  public void setLoadBalancers(List<LBHealthSummary> loadBalancers) {
-    this.loadBalancers = loadBalancers;
-  }
-
   public enum TargetHealthStatus {
     UNHEALTHY,
     HEALTHY,
@@ -84,32 +70,17 @@ public class TencentCloudTargetHealth implements Health {
     }
   }
 
+  @Data
   public static class LBHealthSummary {
+
+    private String loadBalancerName;
+    private ServiceStatus state;
 
     public String getDescription() {
       return state.equals(ServiceStatus.OutOfService)
           ? "Instance has failed at least the Unhealthy Threshold number of health checks consecutively."
           : "Healthy";
     }
-
-    public String getLoadBalancerName() {
-      return loadBalancerName;
-    }
-
-    public void setLoadBalancerName(String loadBalancerName) {
-      this.loadBalancerName = loadBalancerName;
-    }
-
-    public ServiceStatus getState() {
-      return state;
-    }
-
-    public void setState(ServiceStatus state) {
-      this.state = state;
-    }
-
-    private String loadBalancerName;
-    private ServiceStatus state;
 
     public enum ServiceStatus {
       InService,

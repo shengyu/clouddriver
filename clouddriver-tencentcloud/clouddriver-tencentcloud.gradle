@@ -11,8 +11,6 @@ dependencies {
   annotationProcessor "org.projectlombok:lombok"
   testAnnotationProcessor "org.projectlombok:lombok"
 
-  implementation "org.codehaus.groovy:groovy-all"
-
   implementation "com.netflix.frigga:frigga"
   implementation "com.netflix.spectator:spectator-api"
   implementation "com.netflix.spinnaker.fiat:fiat-api:$fiatVersion"
@@ -25,7 +23,7 @@ dependencies {
   implementation "org.springframework.boot:spring-boot-actuator"
   implementation "org.springframework.boot:spring-boot-starter-web"
   implementation "com.google.guava:guava"
-  implementation "com.tencentcloudapi:tencentcloud-sdk-java:3.0.103"
+  implementation "com.tencentcloudapi:tencentcloud-sdk-java:3.1.51"
 
   testImplementation "cglib:cglib-nodep"
   testImplementation "org.assertj:assertj-core"

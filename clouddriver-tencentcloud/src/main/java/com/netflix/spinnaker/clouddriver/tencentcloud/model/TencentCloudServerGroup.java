@@ -163,10 +163,13 @@ public class TencentCloudServerGroup implements ServerGroup, TencentCloudBasicRe
   @Override
   public Capacity getCapacity() {
     Capacity capacity = new Capacity();
-    capacity.setMin(asg != null && asg.getMinSize() != null ? asg.getMinSize() : 0);
-    capacity.setMax(asg != null && asg.getMaxSize() != null ? asg.getMaxSize() : 0);
+    capacity.setMin(
+        Math.toIntExact(asg != null && asg.getMinSize() != null ? asg.getMinSize() : 0));
+    capacity.setMax(
+        Math.toIntExact(asg != null && asg.getMaxSize() != null ? asg.getMaxSize() : 0));
     capacity.setDesired(
-        asg != null && asg.getDesiredCapacity() != null ? asg.getDesiredCapacity() : 0);
+        Math.toIntExact(
+            asg != null && asg.getDesiredCapacity() != null ? asg.getDesiredCapacity() : 0));
     return capacity;
   }
 
@@ -189,7 +192,7 @@ public class TencentCloudServerGroup implements ServerGroup, TencentCloudBasicRe
 
                   @Override
                   public Map<String, Object> getImage() {
-                    return ((Map<String, Object>) (image));
+                    return image;
                   }
 
                   public String getServerGroupName() {

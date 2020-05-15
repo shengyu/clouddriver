@@ -163,7 +163,7 @@ public class TencentCloudLoadBalancerInstanceStateCachingAgent
           for (TargetHealth instanceHealth : instanceHealths) {
             String targetId = instanceHealth.getTargetId();
             Boolean healthStatus = instanceHealth.getHealthStatus();
-            Integer port = instanceHealth.getPort();
+            Long port = instanceHealth.getPort();
             TencentCloudLoadBalancerTargetHealth health =
                 new TencentCloudLoadBalancerTargetHealth();
             health.setInstanceId(targetId);

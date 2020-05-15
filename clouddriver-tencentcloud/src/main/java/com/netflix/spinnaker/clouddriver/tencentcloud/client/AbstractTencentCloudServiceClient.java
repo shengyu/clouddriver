@@ -27,8 +27,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public abstract class AbstractTencentCloudServiceClient {
-  public static final Integer MAX_QUERY_TIME = 1000;
-  public static final Integer DEFAULT_LIMIT = 100;
+  public static final long MAX_QUERY_TIME = 1000;
+  public static final long DEFAULT_LIMIT = 100;
   private Credential credential;
   private HttpProfile httpProfile;
   private ClientProfile clientProfile;

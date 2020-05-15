@@ -21,12 +21,12 @@ import lombok.Data;
 @Data
 public class TencentCloudLoadBalancerHealthCheck {
 
-  private Integer healthSwitch;
-  private Integer timeOut;
-  private Integer intervalTime;
-  private Integer healthNum;
-  private Integer unHealthNum;
-  private Integer httpCode;
+  private Long healthSwitch;
+  private Long timeOut;
+  private Long intervalTime;
+  private Long healthNum;
+  private Long unHealthNum;
+  private Long httpCode;
   private String httpCheckPath;
   private String httpCheckDomain;
   private String httpCheckMethod;

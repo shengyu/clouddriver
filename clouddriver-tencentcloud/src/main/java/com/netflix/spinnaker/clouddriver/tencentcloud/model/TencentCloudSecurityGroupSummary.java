@@ -17,24 +17,13 @@
 package com.netflix.spinnaker.clouddriver.tencentcloud.model;
 
 import com.netflix.spinnaker.clouddriver.model.SecurityGroupSummary;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
 public class TencentCloudSecurityGroupSummary implements SecurityGroupSummary {
 
   private String name;
   private String id;
-
-  public TencentCloudSecurityGroupSummary(String name, String id) {
-    this.name = name;
-    this.id = id;
-  }
-
-  @Override
-  public String getName() {
-    return name;
-  }
-
-  @Override
-  public String getId() {
-    return id;
-  }
 }

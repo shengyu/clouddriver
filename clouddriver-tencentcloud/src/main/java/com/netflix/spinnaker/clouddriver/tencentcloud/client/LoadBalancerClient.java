@@ -61,11 +61,12 @@ import org.springframework.util.StringUtils;
 @Slf4j
 public class LoadBalancerClient {
 
-  private static final int DEFAULT_LIMIT = 100;
+  private static final long DEFAULT_LIMIT = 100;
   private static final int MAX_TRY_COUNT = 20;
   private static final int MAX_RULE_TRY_COUNT = 40;
   private static final int REQ_TRY_INTERVAL = 500;
   private static final int DESCRIBE_TARGET_HEALTH_LIMIT = 30;
+  private static final long FORWARD_TYPE = 1L;
   private ClbClient client;
 
   public LoadBalancerClient(String secretId, String secretKey, String region) {
@@ -76,12 +77,12 @@ public class LoadBalancerClient {
     try {
       DescribeLoadBalancersRequest request = new DescribeLoadBalancersRequest();
       request.setLimit(DEFAULT_LIMIT);
-      request.setForward(1);
+      request.setForward(FORWARD_TYPE);
       DescribeLoadBalancersResponse resp = client.DescribeLoadBalancers(request);
       List<LoadBalancer> loadBalancerAll =
           new ArrayList<>(Arrays.asList(resp.getLoadBalancerSet()));
-      int totalCount = resp.getTotalCount();
-      int getCount = DEFAULT_LIMIT;
+      long totalCount = resp.getTotalCount();
+      long getCount = DEFAULT_LIMIT;
 
       while (totalCount > getCount) {
         request.setOffset(getCount);
@@ -100,8 +101,8 @@ public class LoadBalancerClient {
     try {
       DescribeLoadBalancersRequest req = new DescribeLoadBalancersRequest();
       req.setLimit(DEFAULT_LIMIT);
-      req.setForward(1); // 过滤应用型
-      req.setLoadBalancerName(name); // 过滤lb name
+      req.setForward(FORWARD_TYPE);
+      req.setLoadBalancerName(name);
       DescribeLoadBalancersResponse resp = client.DescribeLoadBalancers(req);
       return Arrays.asList(resp.getLoadBalancerSet());
     } catch (TencentCloudSDKException e) {
@@ -125,7 +126,7 @@ public class LoadBalancerClient {
       CreateLoadBalancerRequest req = new CreateLoadBalancerRequest();
       req.setLoadBalancerType(description.getLoadBalancerType()); // OPEN：公网属性， INTERNAL：内网属性
       req.setLoadBalancerName(description.getLoadBalancerName());
-      req.setForward(1); // 应用型
+      req.setForward(FORWARD_TYPE);
       if (!StringUtils.isEmpty(description.getVpcId())) {
         req.setVpcId(description.getVpcId());
       }
@@ -194,7 +195,7 @@ public class LoadBalancerClient {
     try {
       CreateListenerRequest req = new CreateListenerRequest();
       req.setLoadBalancerId(loadBalancerId);
-      req.setPorts(new Integer[] {listener.getPort()});
+      req.setPorts(new Long[] {listener.getPort()});
       req.setProtocol(listener.getProtocol());
       String listenerName = listener.getProtocol() + listener.getPort();
       if (!StringUtils.isEmpty(listener.getListenerName())) {

@@ -26,7 +26,7 @@ public class TencentCloudInstanceType implements InstanceType {
   private String region;
   private String zone;
   private String account;
-  private Integer cpu;
-  private Integer mem;
+  private Long cpu;
+  private Long mem;
   private String instanceFamily;
 }

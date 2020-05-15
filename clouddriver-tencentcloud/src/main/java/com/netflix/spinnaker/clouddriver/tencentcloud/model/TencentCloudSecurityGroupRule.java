@@ -27,10 +27,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TencentCloudSecurityGroupRule {
   // rule index
-  private Integer index;
+  private Long index;
   // TCP, UDP, ICMP, GRE, ALL
   private String protocol;
-  // all, 离散port,  range
   private String port;
   private String cidrBlock;
   // ACCEPT or DROP

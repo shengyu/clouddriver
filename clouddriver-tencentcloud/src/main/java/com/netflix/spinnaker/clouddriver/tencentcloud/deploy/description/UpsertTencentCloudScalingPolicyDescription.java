@@ -36,10 +36,10 @@ public class UpsertTencentCloudScalingPolicyDescription
   private OperationType operationType;
   private String scalingPolicyId;
   private String adjustmentType;
-  private Integer adjustmentValue;
+  private Long adjustmentValue;
   private MetricAlarm metricAlarm;
   private List<String> notificationUserGroupIds = new ArrayList<>();
-  private Integer cooldown;
+  private Long cooldown;
 
   public enum OperationType {
     CREATE,

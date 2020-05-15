@@ -41,7 +41,7 @@ public class CloudVirtualMachineClient extends AbstractTencentCloudServiceClient
       TerminateInstancesRequest request = new TerminateInstancesRequest();
       int len = instanceIds.size();
       for (int i = 0; i < len; i += DEFAULT_LIMIT) {
-        int endIndex = Math.min(len, i + DEFAULT_LIMIT);
+        int endIndex = Math.toIntExact(Math.min(len, i + DEFAULT_LIMIT));
         request.setInstanceIds(instanceIds.subList(i, endIndex).toArray(new String[0]));
         client.TerminateInstances(request);
       }
@@ -55,7 +55,7 @@ public class CloudVirtualMachineClient extends AbstractTencentCloudServiceClient
       RebootInstancesRequest request = new RebootInstancesRequest();
       int len = instanceIds.size();
       for (int i = 0; i < len; i += DEFAULT_LIMIT) {
-        int endIndex = Math.min(len, i + DEFAULT_LIMIT);
+        int endIndex = Math.toIntExact(Math.min(len, i + DEFAULT_LIMIT));
         request.setInstanceIds(instanceIds.subList(i, endIndex).toArray(new String[0]));
         client.RebootInstances(request);
       }
@@ -78,7 +78,7 @@ public class CloudVirtualMachineClient extends AbstractTencentCloudServiceClient
     List<KeyPair> result = new ArrayList<>();
     DescribeKeyPairsRequest request = new DescribeKeyPairsRequest();
     try {
-      int offset = 0;
+      long offset = 0;
       int queryIndex = 0;
       while (queryIndex++ < MAX_QUERY_TIME) {
         request.setOffset(offset);
@@ -107,7 +107,7 @@ public class CloudVirtualMachineClient extends AbstractTencentCloudServiceClient
     List<Image> result = new ArrayList<>();
     DescribeImagesRequest request = new DescribeImagesRequest();
     try {
-      int offset = 0;
+      long offset = 0;
       int queryIndex = 0;
       while (queryIndex++ < MAX_QUERY_TIME) {
         request.setOffset(offset);
@@ -139,11 +139,11 @@ public class CloudVirtualMachineClient extends AbstractTencentCloudServiceClient
       int offset = 0;
       int queryIndex = 0;
       while (queryIndex++ < MAX_QUERY_TIME) {
-        request.setOffset(offset);
+        request.setOffset((long) offset);
         request.setLimit(DEFAULT_LIMIT);
 
         if (!CollectionUtils.isEmpty(instanceIds)) {
-          int end = Math.min(offset + DEFAULT_LIMIT, instanceIds.size());
+          int end = Math.toIntExact(Math.min(offset + DEFAULT_LIMIT, instanceIds.size()));
           if (offset < end) {
             request.setInstanceIds(instanceIds.subList(offset, end).toArray(new String[0]));
           }

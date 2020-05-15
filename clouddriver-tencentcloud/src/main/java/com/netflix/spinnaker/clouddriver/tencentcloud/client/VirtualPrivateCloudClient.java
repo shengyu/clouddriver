@@ -124,7 +124,7 @@ public class VirtualPrivateCloudClient {
       DescribeSecurityGroupsResponse resp = client.DescribeSecurityGroups(req);
       List<SecurityGroup> securityGroupAll =
           new ArrayList<>(Arrays.asList(resp.getSecurityGroupSet()));
-      int totalCount = resp.getTotalCount();
+      long totalCount = resp.getTotalCount();
       int counter = DEFAULT_LIMIT;
       while (totalCount > counter) {
         req.setOffset(String.valueOf(counter));
@@ -192,7 +192,7 @@ public class VirtualPrivateCloudClient {
       req.setLimit(DEFAULT_LIMIT_STR);
       DescribeVpcsResponse resp = client.DescribeVpcs(req);
       List<Vpc> networkAll = new ArrayList<>(Arrays.asList(resp.getVpcSet()));
-      int totalCount = resp.getTotalCount();
+      long totalCount = resp.getTotalCount();
       int counter = DEFAULT_LIMIT;
       while (totalCount > counter) {
         req.setOffset(String.valueOf(counter));
@@ -213,7 +213,7 @@ public class VirtualPrivateCloudClient {
       req.setLimit(DEFAULT_LIMIT_STR);
       DescribeSubnetsResponse resp = client.DescribeSubnets(req);
       List<Subnet> subnetAll = new ArrayList<>(Arrays.asList(resp.getSubnetSet()));
-      int totalCount = resp.getTotalCount();
+      long totalCount = resp.getTotalCount();
       int counter = DEFAULT_LIMIT;
       while (totalCount > counter) {
         req.setOffset(String.valueOf(counter));

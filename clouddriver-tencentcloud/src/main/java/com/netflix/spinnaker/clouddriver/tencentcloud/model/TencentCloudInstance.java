@@ -27,7 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lombok.Data;
 
+@Data
 public class TencentCloudInstance implements Instance, TencentCloudBasicResource {
 
   private final String cloudProvider = TencentCloudProvider.ID;
@@ -126,141 +128,5 @@ public class TencentCloudInstance implements Instance, TencentCloudBasicResource
   private static boolean anyOutOfService(List<Map<String, Object>> healthList) {
     return healthList.stream()
         .anyMatch(health -> health.get("state").equals(HealthState.OutOfService.toString()));
-  }
-
-  public final String getCloudProvider() {
-    return cloudProvider;
-  }
-
-  public final String getProviderType() {
-    return providerType;
-  }
-
-  public String getInstanceName() {
-    return instanceName;
-  }
-
-  public void setInstanceName(String instanceName) {
-    this.instanceName = instanceName;
-  }
-
-  public String getAccount() {
-    return account;
-  }
-
-  public void setAccount(String account) {
-    this.account = account;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Long getLaunchTime() {
-    return launchTime;
-  }
-
-  public void setLaunchTime(Long launchTime) {
-    this.launchTime = launchTime;
-  }
-
-  public String getZone() {
-    return zone;
-  }
-
-  public void setZone(String zone) {
-    this.zone = zone;
-  }
-
-  public TencentCloudInstanceHealth getInstanceHealth() {
-    return instanceHealth;
-  }
-
-  public void setInstanceHealth(TencentCloudInstanceHealth instanceHealth) {
-    this.instanceHealth = instanceHealth;
-  }
-
-  public TencentCloudTargetHealth getTargetHealth() {
-    return targetHealth;
-  }
-
-  public void setTargetHealth(TencentCloudTargetHealth targetHealth) {
-    this.targetHealth = targetHealth;
-  }
-
-  public String getVpcId() {
-    return vpcId;
-  }
-
-  public void setVpcId(String vpcId) {
-    this.vpcId = vpcId;
-  }
-
-  public String getSubnetId() {
-    return subnetId;
-  }
-
-  public void setSubnetId(String subnetId) {
-    this.subnetId = subnetId;
-  }
-
-  public List<String> getPrivateIpAddresses() {
-    return privateIpAddresses;
-  }
-
-  public void setPrivateIpAddresses(List<String> privateIpAddresses) {
-    this.privateIpAddresses = privateIpAddresses;
-  }
-
-  public List<String> getPublicIpAddresses() {
-    return publicIpAddresses;
-  }
-
-  public void setPublicIpAddresses(List<String> publicIpAddresses) {
-    this.publicIpAddresses = publicIpAddresses;
-  }
-
-  public String getInstanceType() {
-    return instanceType;
-  }
-
-  public void setInstanceType(String instanceType) {
-    this.instanceType = instanceType;
-  }
-
-  public String getImageId() {
-    return imageId;
-  }
-
-  public void setImageId(String imageId) {
-    this.imageId = imageId;
-  }
-
-  public List<String> getSecurityGroupIds() {
-    return securityGroupIds;
-  }
-
-  public void setSecurityGroupIds(List<String> securityGroupIds) {
-    this.securityGroupIds = securityGroupIds;
-  }
-
-  public List<Map<String, String>> getTags() {
-    return tags;
-  }
-
-  public void setTags(List<Map<String, String>> tags) {
-    this.tags = tags;
-  }
-
-  public String getServerGroupName() {
-    return serverGroupName;
-  }
-
-  public void setServerGroupName(String serverGroupName) {
-    this.serverGroupName = serverGroupName;
   }
 }

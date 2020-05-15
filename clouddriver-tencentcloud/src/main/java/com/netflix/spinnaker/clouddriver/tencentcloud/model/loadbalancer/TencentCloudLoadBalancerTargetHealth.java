@@ -22,7 +22,7 @@ import lombok.Data;
 public class TencentCloudLoadBalancerTargetHealth {
 
   private String instanceId;
-  private Integer port;
+  private Long port;
   private Boolean healthStatus;
   private String loadBalancerId;
   private String listenerId;

@@ -51,6 +51,7 @@ public class TencentCloudCredentialsInitializer implements CredentialsInitialize
               accountCredentialsRepository.save(managedAccount.getName(), credentials);
               credentialsList.add(credentials);
             });
+
     return credentialsList;
   }
 }

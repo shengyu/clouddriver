@@ -244,7 +244,7 @@ public abstract class AbstractEnableDisableAtomicOperation implements AtomicOper
                 id -> {
                   Target target = new Target();
                   target.setInstanceId(id);
-                  target.setWeight(10);
+                  target.setWeight(10L);
                   return target;
                 })
             .collect(Collectors.toList());

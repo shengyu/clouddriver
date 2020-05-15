@@ -24,12 +24,12 @@ public class TencentCloudLoadBalancerListener {
   private String listenerId;
   private String listenerName;
   private String protocol;
-  private Integer port;
+  private Long port;
   private TencentCloudLoadBalancerHealthCheck healthCheck;
   private TencentCloudLoadBalancerCertificate certificate;
-  private Integer sessionExpireTime;
+  private Long sessionExpireTime;
   private String scheduler;
-  private Integer sniSwitch;
+  private Long sniSwitch;
   // target, tcp/udp 4 layer
   private List<TencentCloudLoadBalancerTarget> targets;
   // rule, http/https 7 layer

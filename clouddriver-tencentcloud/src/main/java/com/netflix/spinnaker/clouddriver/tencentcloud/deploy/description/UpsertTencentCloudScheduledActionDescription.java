@@ -32,9 +32,9 @@ public class UpsertTencentCloudScheduledActionDescription
   private String region;
   private OperationType operationType;
   private String scheduledActionId;
-  private Integer maxSize;
-  private Integer minSize;
-  private Integer desiredCapacity;
+  private Long maxSize;
+  private Long minSize;
+  private Long desiredCapacity;
   private String startTime;
   private String endTime;
   private String recurrence;

@@ -36,10 +36,10 @@ public class UpsertTencentCloudLoadBalancerDescription
   private String loadBalancerId;
   private String loadBalancerName;
   private String loadBalancerType;
-  private Integer forwardType;
+  private Long forwardType;
   private String vpcId;
   private String subnetId;
-  private Integer projectId;
+  private Long projectId;
   private List<String> securityGroups = new ArrayList<>();
   private List<TencentCloudLoadBalancerListener> listener = new ArrayList<>();
 }

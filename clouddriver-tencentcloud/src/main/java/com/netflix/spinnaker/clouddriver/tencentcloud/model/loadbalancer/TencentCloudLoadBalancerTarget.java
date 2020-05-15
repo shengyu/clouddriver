@@ -22,7 +22,7 @@ import lombok.Data;
 public class TencentCloudLoadBalancerTarget {
 
   private String instanceId;
-  private Integer port;
+  private Long port;
   private String type;
-  private Integer weight;
+  private Long weight;
 }

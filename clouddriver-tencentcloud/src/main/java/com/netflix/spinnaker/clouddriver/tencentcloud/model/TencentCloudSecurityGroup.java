@@ -22,13 +22,14 @@ import com.netflix.spinnaker.clouddriver.model.SecurityGroup;
 import com.netflix.spinnaker.clouddriver.model.SecurityGroupSummary;
 import com.netflix.spinnaker.clouddriver.model.securitygroups.Rule;
 import com.netflix.spinnaker.clouddriver.tencentcloud.TencentCloudProvider;
-import com.netflix.spinnaker.moniker.Moniker;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lombok.Data;
 
 @JsonInclude(Include.NON_EMPTY)
+@Data
 public class TencentCloudSecurityGroup implements SecurityGroup {
 
   private final String type = TencentCloudProvider.ID;
@@ -45,13 +46,6 @@ public class TencentCloudSecurityGroup implements SecurityGroup {
   private Set<Rule> outboundRules = new HashSet<>();
   private List<TencentCloudSecurityGroupRule> inRules = new ArrayList<>();
   private List<TencentCloudSecurityGroupRule> outRules = new ArrayList<>();
-
-  public void setMoniker(Moniker _ignored) {}
-
-  @Override
-  public SecurityGroupSummary getSummary() {
-    return new TencentCloudSecurityGroupSummary(name, id);
-  }
 
   public TencentCloudSecurityGroup(
       String id,
@@ -76,51 +70,8 @@ public class TencentCloudSecurityGroup implements SecurityGroup {
     this.outRules.addAll(outRules);
   }
 
-  public final String getType() {
-    return type;
-  }
-
-  public final String getCloudProvider() {
-    return cloudProvider;
-  }
-
-  public final String getId() {
-    return id;
-  }
-
-  public final String getName() {
-    return name;
-  }
-
-  public final String getDescription() {
-    return description;
-  }
-
-  public final String getApplication() {
-    return application;
-  }
-
-  public final String getAccountName() {
-    return accountName;
-  }
-
-  public final String getRegion() {
-    return region;
-  }
-
-  public final Set<Rule> getInboundRules() {
-    return inboundRules;
-  }
-
-  public final Set<Rule> getOutboundRules() {
-    return outboundRules;
-  }
-
-  public final List<TencentCloudSecurityGroupRule> getInRules() {
-    return inRules;
-  }
-
-  public final List<TencentCloudSecurityGroupRule> getOutRules() {
-    return outRules;
+  @Override
+  public SecurityGroupSummary getSummary() {
+    return new TencentCloudSecurityGroupSummary(name, id);
   }
 }

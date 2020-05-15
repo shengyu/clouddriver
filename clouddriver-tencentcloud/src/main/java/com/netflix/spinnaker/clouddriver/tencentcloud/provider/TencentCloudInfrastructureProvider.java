@@ -28,21 +28,22 @@ import com.netflix.spinnaker.cats.agent.AgentSchedulerAware;
 import com.netflix.spinnaker.clouddriver.cache.SearchableProvider;
 import com.netflix.spinnaker.clouddriver.tencentcloud.cache.Keys;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import lombok.Getter;
 
+@Getter
 public class TencentCloudInfrastructureProvider extends AgentSchedulerAware
     implements SearchableProvider {
 
-  private String providerName;
-  private List<Agent> agents;
-  private Set<String> defaultCaches;
-  private Map<String, String> urlMappingTemplates;
-  private Map<SearchableResource, SearchResultHydrator> searchResultHydrators;
+  private final String providerName;
+  private final List<Agent> agents;
+  private final Set<String> defaultCaches;
+  private final Map<String, String> urlMappingTemplates;
+  private final Map<SearchableResource, SearchResultHydrator> searchResultHydrators;
 
   public TencentCloudInfrastructureProvider(List<Agent> agents) {
     this.providerName = TencentCloudInfrastructureProvider.class.getName();
@@ -67,32 +68,7 @@ public class TencentCloudInfrastructureProvider extends AgentSchedulerAware
   }
 
   @Override
-  public Set<String> getDefaultCaches() {
-    return this.defaultCaches;
-  }
-
-  @Override
-  public Map<String, String> getUrlMappingTemplates() {
-    return this.urlMappingTemplates;
-  }
-
-  @Override
-  public Map<SearchableResource, SearchResultHydrator> getSearchResultHydrators() {
-    return this.searchResultHydrators;
-  }
-
-  @Override
   public Map<String, String> parseKey(String key) {
     return Keys.parse(key);
-  }
-
-  @Override
-  public String getProviderName() {
-    return this.providerName;
-  }
-
-  @Override
-  public Collection<Agent> getAgents() {
-    return this.agents;
   }
 }

@@ -49,7 +49,7 @@ public class TencentCloudDeployDescription extends AbstractTencentCloudCredentia
   private String instanceType;
 
   private String imageId;
-  private Integer projectId;
+  private Long projectId;
   private SystemDisk systemDisk;
   private List<DataDisk> dataDisks;
   private InternetAccessible internetAccessible;
@@ -64,12 +64,12 @@ public class TencentCloudDeployDescription extends AbstractTencentCloudCredentia
   private List<InstanceTag> instanceTags;
 
   /** auto scaling group part */
-  private Integer maxSize;
+  private Long maxSize;
 
-  private Integer minSize;
-  private Integer desiredCapacity;
+  private Long minSize;
+  private Long desiredCapacity;
   private String vpcId;
-  private Integer defaultCooldown;
+  private Long defaultCooldown;
   private List<String> loadBalancerIds;
   private List<ForwardLoadBalancer> forwardLoadBalancers;
   private List<String> subnetIds;
