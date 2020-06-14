@@ -334,6 +334,7 @@ public class AutoScalingClient extends AbstractTencentCloudServiceClient {
       Filter filter = new Filter();
       filter.setName("auto-scaling-group-name");
       filter.setValues(new String[] {name});
+      request.setFilters(new Filter[] {filter});
       DescribeAutoScalingGroupsResponse response = client.DescribeAutoScalingGroups(request);
       return Arrays.asList(response.getAutoScalingGroupSet());
     } catch (TencentCloudSDKException e) {
