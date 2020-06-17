@@ -42,6 +42,7 @@ import com.netflix.spinnaker.clouddriver.names.NamerRegistry;
 import com.netflix.spinnaker.clouddriver.tencentcloud.TencentCloudProvider;
 import com.netflix.spinnaker.clouddriver.tencentcloud.cache.Keys;
 import com.netflix.spinnaker.clouddriver.tencentcloud.client.AutoScalingClient;
+import com.netflix.spinnaker.clouddriver.tencentcloud.exception.TencentCloudOperationException;
 import com.netflix.spinnaker.clouddriver.tencentcloud.model.TencentCloudBasicResource;
 import com.netflix.spinnaker.clouddriver.tencentcloud.model.TencentCloudInstance;
 import com.netflix.spinnaker.clouddriver.tencentcloud.model.TencentCloudServerGroup;
@@ -556,7 +557,19 @@ public class TencentCloudServerGroupCachingAgent extends AbstractTencentCloudCac
     log.info("Enter tencentcloud server group agent handle " + serverGroupName);
 
     TencentCloudServerGroup serverGroup =
-        metricsSupport.readData(() -> loadAsgAsServerGroup(serverGroupName).get(0));
+        metricsSupport.readData(
+            () -> {
+              try {
+                List<TencentCloudServerGroup> sgList = loadAsgAsServerGroup(serverGroupName);
+                if (CollectionUtils.isEmpty(sgList)) {
+                  return null;
+                } else {
+                  return sgList.get(0);
+                }
+              } catch (TencentCloudOperationException e) {
+                return null;
+              }
+            });
 
     if (serverGroup == null) {
       return null;

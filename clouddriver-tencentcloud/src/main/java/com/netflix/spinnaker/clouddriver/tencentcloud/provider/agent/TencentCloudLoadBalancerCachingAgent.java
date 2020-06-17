@@ -40,6 +40,7 @@ import com.netflix.spinnaker.clouddriver.names.NamerRegistry;
 import com.netflix.spinnaker.clouddriver.tencentcloud.TencentCloudProvider;
 import com.netflix.spinnaker.clouddriver.tencentcloud.cache.Keys;
 import com.netflix.spinnaker.clouddriver.tencentcloud.client.LoadBalancerClient;
+import com.netflix.spinnaker.clouddriver.tencentcloud.exception.TencentCloudOperationException;
 import com.netflix.spinnaker.clouddriver.tencentcloud.model.TencentCloudBasicResource;
 import com.netflix.spinnaker.clouddriver.tencentcloud.model.loadbalancer.TencentCloudLoadBalancer;
 import com.netflix.spinnaker.clouddriver.tencentcloud.model.loadbalancer.TencentCloudLoadBalancerCertificate;
@@ -308,7 +309,19 @@ public class TencentCloudLoadBalancerCachingAgent
     }
 
     TencentCloudLoadBalancer loadBalancer =
-        metricsSupport.readData(() -> loadLoadBalancerData(loadBalancerName).get(0));
+        metricsSupport.readData(
+            () -> {
+              try {
+                List<TencentCloudLoadBalancer> lbList = loadLoadBalancerData(loadBalancerName);
+                if (CollectionUtils.isEmpty(lbList)) {
+                  return null;
+                } else {
+                  return lbList.get(0);
+                }
+              } catch (TencentCloudOperationException e) {
+                return null;
+              }
+            });
 
     if (loadBalancer == null) {
       log.info("Can not find loadBalancer " + loadBalancerName);

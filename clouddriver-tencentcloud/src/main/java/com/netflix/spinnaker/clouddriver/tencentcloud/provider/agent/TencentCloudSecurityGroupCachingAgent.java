@@ -37,6 +37,7 @@ import com.netflix.spinnaker.clouddriver.cache.OnDemandMetricsSupport;
 import com.netflix.spinnaker.clouddriver.tencentcloud.TencentCloudProvider;
 import com.netflix.spinnaker.clouddriver.tencentcloud.cache.Keys;
 import com.netflix.spinnaker.clouddriver.tencentcloud.client.VirtualPrivateCloudClient;
+import com.netflix.spinnaker.clouddriver.tencentcloud.exception.TencentCloudOperationException;
 import com.netflix.spinnaker.clouddriver.tencentcloud.model.TencentCloudSecurityGroupDescription;
 import com.netflix.spinnaker.clouddriver.tencentcloud.model.TencentCloudSecurityGroupRule;
 import com.netflix.spinnaker.clouddriver.tencentcloud.provider.TencentCloudInfrastructureProvider;
@@ -157,7 +158,14 @@ public class TencentCloudSecurityGroupCachingAgent
   private OnDemandResult updateSecurityGroup(
       ProviderCache providerCache, String securityGroupName) {
     TencentCloudSecurityGroupDescription updatedSecurityGroup =
-        metricsSupport.readData(() -> loadSecurityGroupById(securityGroupName));
+        metricsSupport.readData(
+            () -> {
+              try {
+                return loadSecurityGroupById(securityGroupName);
+              } catch (TencentCloudOperationException e) {
+                return null;
+              }
+            });
     if (updatedSecurityGroup == null) {
       log.info(
           "TencentCloudSecurityGroupCachingAgent: Can not find securityGroup "
