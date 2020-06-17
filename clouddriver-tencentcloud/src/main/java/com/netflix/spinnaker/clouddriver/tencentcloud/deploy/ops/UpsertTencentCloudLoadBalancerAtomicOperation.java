@@ -157,17 +157,16 @@ public class UpsertTencentCloudLoadBalancerAtomicOperation implements AtomicOper
     getTask()
         .updateStatus(
             BASE_PHASE, "Start update loadBalancer " + description.getLoadBalancerId() + " ...");
-    String loadBalancerName = description.getLoadBalancerName();
 
-    List<LoadBalancer> loadBalancerList = lbClient.getLoadBalancerByName(loadBalancerName);
+    String loadBalancerId = description.getLoadBalancerId();
+    List<LoadBalancer> loadBalancerList = lbClient.getLoadBalancerById(loadBalancerId);
     if (CollectionUtils.isEmpty(loadBalancerList)) {
-      getTask().updateStatus(BASE_PHASE, "LoadBalancer " + loadBalancerName + " not exist!");
+      getTask().updateStatus(BASE_PHASE, "LoadBalancer " + loadBalancerId + " not exist!");
       return;
     }
 
     // update securityGroup
     LoadBalancer loadBalancer = loadBalancerList.get(0);
-    String loadBalancerId = loadBalancer.getLoadBalancerId();
     if (loadBalancer.getLoadBalancerType().equals("OPEN")) {
       getTask()
           .updateStatus(
@@ -175,7 +174,7 @@ public class UpsertTencentCloudLoadBalancerAtomicOperation implements AtomicOper
               "Start update securityGroups "
                   + description.getSecurityGroups()
                   + " to loadBalancer "
-                  + loadBalancerName
+                  + loadBalancerId
                   + " ...");
       lbClient.setLBSecurityGroups(loadBalancerId, description.getSecurityGroups());
       getTask()
