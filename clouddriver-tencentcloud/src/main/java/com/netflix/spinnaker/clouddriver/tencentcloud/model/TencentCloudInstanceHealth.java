@@ -19,6 +19,7 @@ package com.netflix.spinnaker.clouddriver.tencentcloud.model;
 import static com.netflix.spinnaker.clouddriver.model.HealthState.Down;
 import static com.netflix.spinnaker.clouddriver.model.HealthState.Starting;
 import static com.netflix.spinnaker.clouddriver.model.HealthState.Unknown;
+import static com.netflix.spinnaker.clouddriver.model.HealthState.Up;
 
 import com.netflix.spinnaker.clouddriver.model.Health;
 import com.netflix.spinnaker.clouddriver.model.HealthState;
@@ -40,9 +41,10 @@ public class TencentCloudInstanceHealth implements Health {
   public HealthState getState() {
     switch (instanceStatus) {
       case PENDING:
+      case STARTING:
         return Starting;
       case RUNNING:
-        return Unknown;
+        return Up;
       case STOPPED:
         return Down;
       default:
