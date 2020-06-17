@@ -46,7 +46,7 @@ public class CloneTencentCloudServerGroupAtomicOperation
 
   private static final String BASE_PHASE = "CLONE_SERVER_GROUP";
 
-  private TencentCloudDeployDescription description;
+  private final TencentCloudDeployDescription description;
   @Autowired private TencentCloudClusterProvider tencentCloudClusterProvider;
   @Autowired private TencentCloudDeployHandler tencentCloudDeployHandler;
 
@@ -64,15 +64,13 @@ public class CloneTencentCloudServerGroupAtomicOperation
     TencentCloudDeployDescription newDescription = new TencentCloudDeployDescription();
     BeanUtils.copyProperties(description, newDescription);
 
-    if (description != null && description.getSource() != null) {
+    if (description.getSource() != null) {
       if (description.getSource().getRegion() == null
           || description.getSource().getServerGroupName() == null) {
         return newDescription;
       }
     }
-    if (description == null) {
-      return newDescription;
-    }
+
     String sourceServerGroupName = description.getSource().getServerGroupName();
     String sourceRegion = description.getSource().getRegion();
     String accountName = description.getAccountName();
